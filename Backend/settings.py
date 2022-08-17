@@ -28,12 +28,13 @@ SECRET_KEY = 'django-insecure-$07nqm_y^$7#8s688sn4qrm%7h38w^*t_4qqrglo8%zf34_mn9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,6 +105,9 @@ DATABASES = {
         
     }
 }
+
+WHITENOISE_USE_FINDERS = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -176,3 +181,5 @@ SOCIALACCOUNT_LOGIN_ON_GET=True
 LOGIN_REDIRECT_URL = 'land'
 LOGOUT_REDIRECT_URL = 'land'
 LOGIN_REQUIRED_URL = 'Auth_School'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
